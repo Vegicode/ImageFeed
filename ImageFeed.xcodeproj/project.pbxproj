@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5099DE952C47B362005BF72F /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099DE942C47B362005BF72F /* ImagesListCell.swift */; };
 		5099DE982C48F70B005BF72F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5099DE972C48F70B005BF72F /* Assets.xcassets */; };
+		5099DE9E2C4A72CC005BF72F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099DE9D2C4A72CC005BF72F /* ProfileViewController.swift */; };
 		50C6ABF92C44F91D00A2D4CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6ABF82C44F91D00A2D4CF /* AppDelegate.swift */; };
 		50C6ABFB2C44F91D00A2D4CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6ABFA2C44F91D00A2D4CF /* SceneDelegate.swift */; };
 		50C6ABFD2C44F91D00A2D4CF /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6ABFC2C44F91D00A2D4CF /* ImagesListViewController.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		5099DE942C47B362005BF72F /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		5099DE972C48F70B005BF72F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5099DE9D2C4A72CC005BF72F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50C6ABF52C44F91D00A2D4CF /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C6ABF82C44F91D00A2D4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50C6ABFA2C44F91D00A2D4CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			children = (
 				5099DE942C47B362005BF72F /* ImagesListCell.swift */,
 				50C6ABFC2C44F91D00A2D4CF /* ImagesListViewController.swift */,
+				5099DE9D2C4A72CC005BF72F /* ProfileViewController.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				50C6ABFD2C44F91D00A2D4CF /* ImagesListViewController.swift in Sources */,
 				5099DE952C47B362005BF72F /* ImagesListCell.swift in Sources */,
+				5099DE9E2C4A72CC005BF72F /* ProfileViewController.swift in Sources */,
 				50C6ABF92C44F91D00A2D4CF /* AppDelegate.swift in Sources */,
 				50C6ABFB2C44F91D00A2D4CF /* SceneDelegate.swift in Sources */,
 			);
