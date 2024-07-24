@@ -224,6 +224,9 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="FQ0-Ok-0hv"/>
+                    <connections>
+                        <outlet property="imageView" destination="swg-NO-Gqb" id="Kam-TG-bgU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJt-wB-zFA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
