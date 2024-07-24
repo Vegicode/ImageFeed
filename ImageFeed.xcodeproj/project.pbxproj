@@ -19,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		507A1E2E2C4F91E1003D572E /* Assets.xcassets 10-21-41-425.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets 10-21-41-425.xcassets"; sourceTree = "<group>"; };
+		507A1E332C50F5F1003D572E /* SingleImgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImgViewController.swift; sourceTree = "<group>"; };
 		5099DE942C47B362005BF72F /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		5099DE9D2C4A72CC005BF72F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50C6ABF52C44F91D00A2D4CF /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +50,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		507A1E322C50F5DD003D572E /* SingleImageView */ = {
+			isa = PBXGroup;
+			children = (
+				507A1E332C50F5F1003D572E /* SingleImgViewController.swift */,
+			);
+			path = SingleImageView;
+			sourceTree = "<group>";
+		};
 		5099DE962C47B934005BF72F /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +86,7 @@
 		50C6ABF72C44F91D00A2D4CF /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				507A1E322C50F5DD003D572E /* SingleImageView */,
 				507A1E2B2C4EC33B003D572E /* Profile */,
 				5099DE962C47B934005BF72F /* ImagesList */,
 				50C6ABF82C44F91D00A2D4CF /* AppDelegate.swift */,
