@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		505103B92C511C3A00FD9166 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		505103BA2C514C4700FD9166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C6ABFE2C44F91D00A2D4CF /* Main.storyboard */; };
 		507A1E2F2C4F91E1003D572E /* Assets.xcassets 10-21-41-425.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 507A1E2E2C4F91E1003D572E /* Assets.xcassets 10-21-41-425.xcassets */; };
 		5099DE952C47B362005BF72F /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099DE942C47B362005BF72F /* ImagesListCell.swift */; };
 		5099DE9E2C4A72CC005BF72F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099DE9D2C4A72CC005BF72F /* ProfileViewController.swift */; };
@@ -15,11 +17,11 @@
 		50C6ABFD2C44F91D00A2D4CF /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6ABFC2C44F91D00A2D4CF /* ImagesListViewController.swift */; };
 		50C6AC002C44F91D00A2D4CF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 50C6ABFF2C44F91D00A2D4CF /* Base */; };
 		50C6AC052C44F92600A2D4CF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 50C6AC042C44F92600A2D4CF /* Base */; };
+		50DF473A2C51689A0091C08A /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DF47392C51689A0091C08A /* SingleImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		507A1E2E2C4F91E1003D572E /* Assets.xcassets 10-21-41-425.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets 10-21-41-425.xcassets"; sourceTree = "<group>"; };
-		507A1E332C50F5F1003D572E /* SingleImgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImgViewController.swift; sourceTree = "<group>"; };
 		5099DE942C47B362005BF72F /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		5099DE9D2C4A72CC005BF72F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50C6ABF52C44F91D00A2D4CF /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,6 +31,7 @@
 		50C6ABFF2C44F91D00A2D4CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50C6AC042C44F92600A2D4CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50C6AC062C44F92600A2D4CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50DF47392C51689A0091C08A /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +56,7 @@
 		507A1E322C50F5DD003D572E /* SingleImageView */ = {
 			isa = PBXGroup;
 			children = (
-				507A1E332C50F5F1003D572E /* SingleImgViewController.swift */,
+				50DF47392C51689A0091C08A /* SingleImageViewController.swift */,
 			);
 			path = SingleImageView;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				50C6AC052C44F92600A2D4CF /* Base in Resources */,
 				50C6AC002C44F91D00A2D4CF /* Base in Resources */,
 				507A1E2F2C4F91E1003D572E /* Assets.xcassets 10-21-41-425.xcassets in Resources */,
+				505103BA2C514C4700FD9166 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,8 +174,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				505103B92C511C3A00FD9166 /* (null) in Sources */,
 				50C6ABFD2C44F91D00A2D4CF /* ImagesListViewController.swift in Sources */,
 				5099DE952C47B362005BF72F /* ImagesListCell.swift in Sources */,
+				50DF473A2C51689A0091C08A /* SingleImageViewController.swift in Sources */,
 				5099DE9E2C4A72CC005BF72F /* ProfileViewController.swift in Sources */,
 				50C6ABF92C44F91D00A2D4CF /* AppDelegate.swift in Sources */,
 				50C6ABFB2C44F91D00A2D4CF /* SceneDelegate.swift in Sources */,
