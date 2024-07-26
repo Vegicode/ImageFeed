@@ -203,7 +203,7 @@
         <scene sceneID="3Hv-VT-1si">
             <objects>
                 <viewController id="I6U-QB-We7" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="itD-jh-80i" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="itD-jh-80i">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -219,9 +219,6 @@
                             <constraint firstItem="swg-NO-Gqb" firstAttribute="leading" secondItem="qfv-gL-rB0" secondAttribute="leading" id="rt1-Ou-bVM"/>
                             <constraint firstItem="qfv-gL-rB0" firstAttribute="bottom" secondItem="swg-NO-Gqb" secondAttribute="bottom" id="ynU-wO-l5G"/>
                         </constraints>
-                        <connections>
-                            <outlet property="imageView" destination="swg-NO-Gqb" id="fhP-bB-2b0"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="FQ0-Ok-0hv"/>
                     <connections>
