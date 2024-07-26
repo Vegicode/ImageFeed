@@ -115,7 +115,7 @@
                     <navigationItem key="navigationItem" id="h6N-wg-0ry"/>
                     <connections>
                         <outlet property="tableView" destination="aoc-vu-7oh" id="N9I-F8-7KM"/>
-                        <segue destination="I6U-QB-We7" kind="show" identifier="ShowSingleImage" id="1bO-bw-UpO"/>
+                        <segue destination="I6U-QB-We7" kind="presentation" identifier="ShowSingleImage" id="1bO-bw-UpO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -202,22 +202,22 @@
         <!--Single Image View Controller-->
         <scene sceneID="3Hv-VT-1si">
             <objects>
-                <viewController id="I6U-QB-We7" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="I6U-QB-We7" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="itD-jh-80i">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="swg-NO-Gqb">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="swg-NO-Gqb">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qfv-gL-rB0"/>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="swg-NO-Gqb" firstAttribute="top" secondItem="qfv-gL-rB0" secondAttribute="top" id="2ag-lB-pqU"/>
-                            <constraint firstItem="qfv-gL-rB0" firstAttribute="trailing" secondItem="swg-NO-Gqb" secondAttribute="trailing" id="ELd-d4-xNm"/>
-                            <constraint firstItem="swg-NO-Gqb" firstAttribute="leading" secondItem="qfv-gL-rB0" secondAttribute="leading" id="rt1-Ou-bVM"/>
-                            <constraint firstItem="qfv-gL-rB0" firstAttribute="bottom" secondItem="swg-NO-Gqb" secondAttribute="bottom" id="ynU-wO-l5G"/>
+                            <constraint firstAttribute="bottom" secondItem="swg-NO-Gqb" secondAttribute="bottom" id="Qnz-99-lRk"/>
+                            <constraint firstItem="swg-NO-Gqb" firstAttribute="leading" secondItem="itD-jh-80i" secondAttribute="leading" id="R9m-pE-GJR"/>
+                            <constraint firstItem="swg-NO-Gqb" firstAttribute="top" secondItem="itD-jh-80i" secondAttribute="top" id="hC1-7s-yOq"/>
+                            <constraint firstAttribute="trailing" secondItem="swg-NO-Gqb" secondAttribute="trailing" id="nlW-Xh-a8V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FQ0-Ok-0hv"/>
