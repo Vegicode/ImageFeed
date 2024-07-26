@@ -210,14 +210,28 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="swg-NO-Gqb">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgL-b5-8Eg">
+                                <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Rcd-Bg-lWC"/>
+                                    <constraint firstAttribute="width" constant="44" id="rYY-uW-KBI"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Backward"/>
+                                <connections>
+                                    <action selector="didTapBackButton:" destination="I6U-QB-We7" eventType="touchUpInside" id="IEQ-68-6hk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qfv-gL-rB0"/>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="swg-NO-Gqb" secondAttribute="bottom" id="Qnz-99-lRk"/>
                             <constraint firstItem="swg-NO-Gqb" firstAttribute="leading" secondItem="itD-jh-80i" secondAttribute="leading" id="R9m-pE-GJR"/>
+                            <constraint firstItem="MgL-b5-8Eg" firstAttribute="leading" secondItem="qfv-gL-rB0" secondAttribute="leading" id="d8r-5z-Sma"/>
                             <constraint firstItem="swg-NO-Gqb" firstAttribute="top" secondItem="itD-jh-80i" secondAttribute="top" id="hC1-7s-yOq"/>
                             <constraint firstAttribute="trailing" secondItem="swg-NO-Gqb" secondAttribute="trailing" id="nlW-Xh-a8V"/>
+                            <constraint firstItem="MgL-b5-8Eg" firstAttribute="top" secondItem="qfv-gL-rB0" secondAttribute="top" id="yQN-KD-ssH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FQ0-Ok-0hv"/>
@@ -259,6 +273,7 @@
     <resources>
         <image name="0" width="1600" height="1059"/>
         <image name="Active" width="42" height="42"/>
+        <image name="Backward" width="24" height="24"/>
         <image name="Image" width="70" height="70"/>
         <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
         <image name="tab_editorial_active" width="31" height="30"/>
