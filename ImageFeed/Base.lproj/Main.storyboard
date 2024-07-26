@@ -115,7 +115,7 @@
                     <navigationItem key="navigationItem" id="h6N-wg-0ry"/>
                     <connections>
                         <outlet property="tableView" destination="aoc-vu-7oh" id="N9I-F8-7KM"/>
-                        <segue destination="I6U-QB-We7" kind="show" identifier="ShowSingleImage" id="1bO-bw-UpO"/>
+                        <segue destination="I6U-QB-We7" kind="show" identifier="ShowSingleImage" id="6eX-nE-IKU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
