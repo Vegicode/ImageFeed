@@ -23,22 +23,50 @@ final class ProfileViewController: UIViewController{
         ])
         
         let label = UILabel()
-        label.text = "Name"
+        let label2 = UILabel()
+        let label3 = UILabel()
+        label.text = "Екатерина Новикова"
+        label2.text = "@ekaterina_nov"
+        label3.text = "Hello, world!"
+        
         label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 23)
+        
+        label2.textColor = UIColor(named: "subTColor")
+        label3.textColor = .white
+        
+        
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
+        
+        label2.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label2)
+        
+        label3.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label3)
+        
         label.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
+        label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
         self.label = label
+        
+        label2.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
+        
+        label2.leadingAnchor.constraint(equalTo: label.leadingAnchor).isActive = true
+        
+        label3.topAnchor.constraint(equalTo: label2.bottomAnchor, constant: 10).isActive = true
+        
+        label3.leadingAnchor.constraint(equalTo: label.leadingAnchor).isActive = true
+        
         
         
         
         let button = UIButton.systemButton(
-            with: UIImage(systemName: "ipad.and.arrow.forward")!,
+            with: UIImage(named: "Exit")!,
             target: self,
             action: #selector(Self.didTapLogoutButton)
         )
-        button.tintColor = .red
+        button.tintColor = UIColor(named: "ColorRed")
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
@@ -46,9 +74,7 @@ final class ProfileViewController: UIViewController{
     }
     @objc
             private func didTapLogoutButton() {
-                label?.removeFromSuperview()
-                      
-                label = nil
+                
             }
     
 }
