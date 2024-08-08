@@ -155,7 +155,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="MM9-OV-8Lx" kind="show" identifier="ShowWebView" id="fAe-Ue-tem"/>
+                                    <segue destination="MM9-OV-8Lx" kind="show" identifier="ShowWebView" id="TPb-di-xRH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -167,7 +167,7 @@
                             <constraint firstItem="xHH-YM-ysm" firstAttribute="trailing" secondItem="WMs-iH-CoR" secondAttribute="trailing" constant="16" id="vpT-cE-ihT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="EOQ-nN-KbS"/>
+                    <navigationItem key="navigationItem" id="5m2-EF-v6o"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cKe-1n-9RY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,15 +277,34 @@
             </objects>
             <point key="canvasLocation" x="-3112" y="204"/>
         </scene>
-        <!--View Controller-->
+        <!--Web View View Controller-->
         <scene sceneID="L3m-Tt-sqC">
             <objects>
-                <viewController id="MM9-OV-8Lx" sceneMemberID="viewController">
+                <viewController id="MM9-OV-8Lx" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R1U-2y-jby" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwE-cV-a2e">
+                                <rect key="frame" x="16" y="103" width="361" height="715"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cWg-UE-V7V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="cwE-cV-a2e" secondAttribute="trailing" id="1J8-pC-pZL"/>
+                            <constraint firstItem="cwE-cV-a2e" firstAttribute="top" secondItem="cWg-UE-V7V" secondAttribute="top" id="AzE-Yh-73z"/>
+                            <constraint firstItem="cwE-cV-a2e" firstAttribute="leading" secondItem="R1U-2y-jby" secondAttribute="leadingMargin" id="pA7-Pe-yaw"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="cwE-cV-a2e" secondAttribute="bottom" id="wso-ER-kid"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="webView" destination="cwE-cV-a2e" id="dbW-oX-OfF"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="x44-9I-Z3g"/>
                 </viewController>

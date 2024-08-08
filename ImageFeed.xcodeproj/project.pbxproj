@@ -77,7 +77,6 @@
 		50C6ABEC2C44F91D00A2D4CF = {
 			isa = PBXGroup;
 			children = (
-				50DB631E2C62A40D0008249E /* Auth */,
 				50C6ABF72C44F91D00A2D4CF /* ImageFeed */,
 				50C6ABF62C44F91D00A2D4CF /* Products */,
 			);
@@ -94,6 +93,7 @@
 		50C6ABF72C44F91D00A2D4CF /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				50DB631E2C62A40D0008249E /* Auth */,
 				507A1E322C50F5DD003D572E /* SingleImageView */,
 				507A1E2B2C4EC33B003D572E /* Profile */,
 				5099DE962C47B934005BF72F /* ImagesList */,
