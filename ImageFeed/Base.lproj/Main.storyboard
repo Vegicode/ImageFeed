@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -281,7 +282,7 @@
         <scene sceneID="L3m-Tt-sqC">
             <objects>
                 <viewController id="MM9-OV-8Lx" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="R1U-2y-jby" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="R1U-2y-jby">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -293,26 +294,37 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-oS-ohW">
+                                <rect key="frame" x="0.0" y="103" width="393" height="4"/>
+                                <color key="tintColor" name="ypBlack"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cWg-UE-V7V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="cwE-cV-a2e" secondAttribute="trailing" id="1J8-pC-pZL"/>
+                            <constraint firstItem="MbG-oS-ohW" firstAttribute="top" secondItem="cWg-UE-V7V" secondAttribute="top" id="6PB-vr-ekw"/>
                             <constraint firstItem="cwE-cV-a2e" firstAttribute="top" secondItem="cWg-UE-V7V" secondAttribute="top" id="AzE-Yh-73z"/>
+                            <constraint firstItem="MbG-oS-ohW" firstAttribute="leading" secondItem="cWg-UE-V7V" secondAttribute="leading" id="Ivi-yL-adO"/>
+                            <constraint firstItem="cWg-UE-V7V" firstAttribute="trailing" secondItem="MbG-oS-ohW" secondAttribute="trailing" id="ndB-qk-g8R"/>
                             <constraint firstItem="cwE-cV-a2e" firstAttribute="leading" secondItem="R1U-2y-jby" secondAttribute="leadingMargin" id="pA7-Pe-yaw"/>
                             <constraint firstAttribute="bottomMargin" secondItem="cwE-cV-a2e" secondAttribute="bottom" id="wso-ER-kid"/>
                         </constraints>
-                        <connections>
-                            <outlet property="webView" destination="cwE-cV-a2e" id="dbW-oX-OfF"/>
-                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="x44-9I-Z3g"/>
+                    <navigationItem key="navigationItem" id="x44-9I-Z3g">
+                        <nil key="title"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="progressView" destination="MbG-oS-ohW" id="4QR-U0-O60"/>
+                        <outlet property="webView" destination="cwE-cV-a2e" id="r1I-Yh-Trj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lTN-mg-4Oq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1415" y="204"/>
+            <point key="canvasLocation" x="-1433" y="204"/>
         </scene>
     </scenes>
+    <color key="tintColor" name="ypBlack"/>
     <resources>
         <image name="0" width="1600" height="1059"/>
         <image name="Active" width="42" height="42"/>
@@ -321,6 +333,9 @@
         <image name="auth_screen_logo" width="60" height="60"/>
         <image name="tab_editorial_active" width="31" height="30"/>
         <image name="tab_profile_active" width="31" height="30"/>
+        <namedColor name="ypBlack">
+            <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
