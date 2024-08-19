@@ -16,8 +16,9 @@ protocol WebViewControllerDelegate: AnyObject {
 final class WebViewViewController: UIViewController{
     
     @IBOutlet var webView: WKWebView!
-    
+
     @IBOutlet var progressView: UIProgressView!
+    
     weak var delegate: WebViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -39,6 +40,15 @@ final class WebViewViewController: UIViewController{
     enum WebViewConsants{
         static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     }
+    override func observeValue(forKeyPath keyPath: String?,
+                              of object: Any?,
+                              change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+       if keyPath == #keyPath(WKWebView.estimatedProgress)  {
+           updateProgress()
+       } else {
+           super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+       }
+   }
     
 }
 extension WebViewViewController: WKNavigationDelegate {
@@ -81,5 +91,12 @@ private extension WebViewViewController {
               
         return item.value
         
+    }
+    
+
+    
+    private func updateProgress(){
+        progressView.progress = Float(webView.estimatedProgress)
+        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
 }
