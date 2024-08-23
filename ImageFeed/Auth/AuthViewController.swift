@@ -13,10 +13,11 @@ protocol AuthViewControllerDelegate: AnyObject {
 
 
 final class AuthViewController: UIViewController{
-    weak var delegate: AuthViewControllerDelegate?
-    
+
     private let ShowWebViewSegueIdentifier = "ShowWebView"
-   
+    let oauth2Service = OAuth2Service.shared
+    weak var delegate: AuthViewControllerDelegate?
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ShowWebViewSegueIdentifier {
             guard
@@ -32,13 +33,21 @@ final class AuthViewController: UIViewController{
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         navigationController?.popToRootViewController(animated: true)
-        
-        delegate?.authViewController(self, didAuthenticateWithCode: code)
-        
-        
+        oauth2Service.fetchOAuthToken(code) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                OAuth2TokenStorage().token = token
+                print("token: \(token)")
+                delegate?.authViewController(self, didAuthenticateWithCode: code)
+            case .failure:
+                print("fail")
+            }
+            
+        }
     }
-    
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        dismiss(animated: true)
-    }
+                    dismiss(animated: true)
+                }
+    
 }

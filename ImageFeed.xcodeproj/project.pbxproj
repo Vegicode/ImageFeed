@@ -10,6 +10,7 @@
 		502D32AA2C70DA4500C7BFAE /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D32A92C70DA4500C7BFAE /* OAuth2Service.swift */; };
 		502D32AD2C71138700C7BFAE /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D32AC2C71138700C7BFAE /* SplashViewController.swift */; };
 		502D32AF2C71301C00C7BFAE /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D32AE2C71301C00C7BFAE /* OAuth2TokenStorage.swift */; };
+		502D32B12C78759500C7BFAE /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D32B02C78759500C7BFAE /* NetworkClient.swift */; };
 		503389712C6FA5B100EE1729 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503389702C6FA5B100EE1729 /* Constants.swift */; };
 		505103B92C511C3A00FD9166 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		505103BA2C514C4700FD9166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C6ABFE2C44F91D00A2D4CF /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		502D32A92C70DA4500C7BFAE /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		502D32AC2C71138700C7BFAE /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		502D32AE2C71301C00C7BFAE /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
+		502D32B02C78759500C7BFAE /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		503389702C6FA5B100EE1729 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		507A1E2E2C4F91E1003D572E /* Assets.xcassets 10-21-41-425.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets 10-21-41-425.xcassets"; sourceTree = "<group>"; };
 		5099DE942C47B362005BF72F /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				50DB631C2C62A3E60008249E /* AuthViewController.swift */,
 				50DB631F2C62A6880008249E /* WebViewViewController.swift */,
+				502D32B02C78759500C7BFAE /* NetworkClient.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				5099DE9E2C4A72CC005BF72F /* ProfileViewController.swift in Sources */,
 				50C6ABF92C44F91D00A2D4CF /* AppDelegate.swift in Sources */,
 				50DB63202C62A6880008249E /* WebViewViewController.swift in Sources */,
+				502D32B12C78759500C7BFAE /* NetworkClient.swift in Sources */,
 				502D32AF2C71301C00C7BFAE /* OAuth2TokenStorage.swift in Sources */,
 				50C6ABFB2C44F91D00A2D4CF /* SceneDelegate.swift in Sources */,
 			);
