@@ -71,6 +71,8 @@ final class ProfileViewController: UIViewController{
         view.addSubview(button)
         button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+    
+        
     }
     @objc
             private func didTapLogoutButton() {
