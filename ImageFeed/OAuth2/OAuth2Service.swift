@@ -7,8 +7,15 @@
 
 import UIKit
 
+enum AuthServiceError: Error{
+    case invalidRequest
+}
+
 final class OAuth2Service {
+    private let urlSession = URLSession.shared //1
     
+    private var task: URLSessionTask? //2
+    private var lastCode: String? //3
     
     static let shared = OAuth2Service(networkClient: NetworkClient())
     
@@ -46,7 +53,7 @@ final class OAuth2Service {
             tokenStorage.token = newValue
         }
     }
-    func makeOAuthTokenRequest(code: String) -> URLRequest? {
+    func makeOAuthTokenRequest(code: String) -> URLRequest? { //18
         let baseURL = URL(string: "https://unsplash.com")
         guard let url = URL(
             string: "/oauth/token"
@@ -57,6 +64,7 @@ final class OAuth2Service {
             + "&&grant_type=authorization_code",
             relativeTo: baseURL
         ) else {
+            assertionFailure("Failed to create URL")
             return nil
         }
         var request = URLRequest(url: url)
@@ -65,9 +73,30 @@ final class OAuth2Service {
     }
     
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        guard let request = makeOAuthTokenRequest(code: code) else {
-            fatalError("Unable to create fetch authorization token request")
+        assert(Thread.isMainThread) //4
+        guard lastCode != code else {
+                completion(.failure(AuthServiceError.invalidRequest))
+                return //8
+            }
+        
+        task?.cancel()
+        lastCode = code //10
+        
+        guard let request = makeOAuthTokenRequest(code: code) else { //11
+            completion(.failure(AuthServiceError.invalidRequest))
+            return
         }
+        
+        let task = urlSession.dataTask(with: request) { [weak self] data, response, error in
+            DispatchQueue.main.async { //12
+                self?.task = nil //14
+                self?.lastCode = nil //15
+            }
+        }
+        
+        self.task = task //16
+        task.resume() //17
+        
         networkClient.data(for: request) { result in
             switch result {
             case .success(let data):
