@@ -5,22 +5,21 @@
 //  Created by Mac on 17.08.2024.
 //
 
-import Foundation
+import UIKit
+import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
-    private let storage = UserDefaults.standard
-    private let tokenKey = "token"
+    let key = "Bearer Token"
     
     var token: String? {
         get{
-            storage.string(forKey: tokenKey)
+            return KeychainWrapper.standard.string(forKey: key)
         }
         set {
-            if let token = newValue {
-                storage.set(token, forKey: tokenKey)
-            } else {
-                storage.removeObject(forKey: tokenKey)
-            }
+            KeychainWrapper.standard.set(newValue ?? " ", forKey: key)
         }
+    }
+    func removeToken() {
+        KeychainWrapper.standard.removeObject(forKey: key)
     }
 }

@@ -18,8 +18,9 @@ protocol WebViewViewControllerDelegate: AnyObject {
 final class WebViewViewController: UIViewController{
     @IBOutlet var webView: WKWebView!
     @IBOutlet var progressView: UIProgressView!
-    
+    private var estimatedProgressObservation: NSKeyValueObservation?
     weak var delegate: WebViewViewControllerDelegate?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,10 @@ final class WebViewViewController: UIViewController{
 
         configureBackButton()
         loadWebView()
+        
+        estimatedProgressObservation = webView.observe(\.estimatedProgress, options: [], changeHandler: { [weak self] _, _ in guard let self = self else { return }
+            self.updateProgress()
+        })
         
 
     }
