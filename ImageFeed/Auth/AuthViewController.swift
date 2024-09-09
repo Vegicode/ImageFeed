@@ -8,14 +8,13 @@
 import UIKit
 import ProgressHUD
 
-protocol AuthViewControllerDelegate: AnyObject {
-    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
-}
+
 
 
 final class AuthViewController: UIViewController{
 
     private let ShowWebViewSegueIdentifier = "ShowWebView"
+    private let storage = OAuth2TokenStorage()
     let oauth2Service = OAuth2Service.shared
     weak var delegate: AuthViewControllerDelegate?
 
@@ -33,25 +32,34 @@ final class AuthViewController: UIViewController{
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        navigationController?.popToRootViewController(animated: true)
+        UIBlockingProgressHUD.show()
+        
         oauth2Service.fetchOAuthToken(code) { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self, let delegate = self.delegate else {
+                print("Error: AuthController not exists or delegate is nil")
+                return
+            }
             
-            ProgressHUD.dismiss()
+            UIBlockingProgressHUD.dismiss()
             
             switch result {
             case .success(let token):
-                OAuth2TokenStorage().token = token
+                self.storage.token = token
                 print("token: \(token)")
-                delegate?.authViewController(self, didAuthenticateWithCode: code)
-            case .failure:
-                print("fail")
+                delegate.didAuthenticate(self)
+            case .failure(let error):
+                let alert = UIAlertController(title:"Что-то пошло не так",
+                                              message: "Не удалось в систему ", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Oк", style: .default)
+                alert.addAction(action)
+                vc.present(alert, animated: true, completion: nil)
+                print(error.localizedDescription)
             }
             
         }
     }
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-                    dismiss(animated: true)
+        vc.dismiss(animated: true)
                 }
     
 }

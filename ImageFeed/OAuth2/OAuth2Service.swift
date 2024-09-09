@@ -12,23 +12,28 @@ enum AuthServiceError: Error{
 }
 
 final class OAuth2Service {
+    
     private let urlSession = URLSession.shared //1
     
     private var task: URLSessionTask? //2
     private var lastCode: String? //3
     
-    static let shared = OAuth2Service(networkClient: NetworkClient())
-    
-    private let networkClient: NetworkRouting
-    private let tokenStorage = OAuth2TokenStorage()
+    static let shared = OAuth2Service()
+    private init() {}
+
+    private (set) var authToken: String {
+        get {
+            return OAuth2TokenStorage().token ?? ""
+        }
+        set {
+            OAuth2TokenStorage().token = newValue
+        }
+    }
     
     private enum JSONError: Error {
         case decodingError
     }
-    private init(networkClient: NetworkRouting) {
-        self.networkClient = networkClient
-    }
-    
+
     struct OAuthTokenResponseBody: Decodable {
         let accessToken: String
         let tokenType: String
@@ -45,14 +50,7 @@ final class OAuth2Service {
         }
     }
     
-    private(set) var authToken: String? {
-        get{
-            return tokenStorage.token
-        }
-        set{
-            tokenStorage.token = newValue
-        }
-    }
+    
     func makeOAuthTokenRequest(code: String) -> URLRequest? { //18
         let baseURL = URL(string: "https://unsplash.com")
         guard let url = URL(
@@ -87,31 +85,27 @@ final class OAuth2Service {
             return
         }
         
-        let task = urlSession.dataTask(with: request) { [weak self] data, response, error in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
+            guard let self = self else { return }
+            
             DispatchQueue.main.async { //12
-                self?.task = nil //14
-                self?.lastCode = nil //15
+                switch result {
+                case .success(let body):
+                    let authToken = body.accessToken
+                    self.authToken = authToken
+                    completion(.success(body.accessToken))
+                    self.task = nil
+                    self.lastCode = nil
+                case .failure(let error):
+                    print("Failed to get accessToken")
+                    completion(.failure(error))
+                }
             }
         }
         
         self.task = task //16
         task.resume() //17
         
-        networkClient.data(for: request) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let response = try JSONDecoder().decode(OAuth2Service.OAuthTokenResponseBody.self, from: data)
-                    completion(.success(response.accessToken))
-                    print("accessToken: \(response.accessToken) have been decoded")
-                } catch {
-                    completion(.failure(JSONError.decodingError))
-                    print("JSON decoding error \(error.localizedDescription)")
-                }
-            case .failure(let error):
-                completion(.failure(error))
-                print(error.localizedDescription)
-            }
-        }
+       
     }
 }
