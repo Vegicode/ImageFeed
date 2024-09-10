@@ -32,9 +32,8 @@ final class SplashViewController: UIViewController {
             } else {
                 guard let navigationController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AuthNavigationController") as? UINavigationController,
                       let viewController = navigationController.viewControllers[0] as? AuthViewController
-                        
                 else{
-                    print("[SplashViewController]: Error to create for AuthViewController")
+                    print("[\(#fileID)]:[\(#function)] -> Wrong AuthView configuration")
                     return
                     
                 }
