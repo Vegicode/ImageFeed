@@ -22,55 +22,67 @@ final class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       
+        UIBlockingProgressHUD.show()
+        DispatchQueue.main.asyncAfter(deadline: .now()+1){
             
             if self.storage.token != nil {
-                guard let token = storage.token else {return}
-                fetchProfile(token: token)
-                
-                
-            } else {
-                guard let navigationController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AuthNavigationController") as? UINavigationController,
-                      let viewController = navigationController.viewControllers[0] as? AuthViewController
-                else{
-                    print("[\(#fileID)]:[\(#function)] -> Wrong AuthView configuration")
-                    return
-                    
-                }
-                
-                viewController.delegate = self
-                navigationController.modalPresentationStyle = .fullScreen
-                present(navigationController, animated: true)
-            }
-                
-            }
+                guard let token = self.storage.token else {return}
+                self.fetchProfile(token: token)
+                           
+                           
+                       } else {
+                           self.showViewController()
+                           UIBlockingProgressHUD.dismiss()
+                       }
+            
+        }
+  }
 }
 
          
            
 
     
- extension SplashViewController {
-     
-        func createAuthView(){
-            let screenImage = UIImage(named: "Vector")
+extension SplashViewController {
+    
+    func createAuthView(){
+        let screenImage = UIImage(named: "Vector")
+        
+        let screenImageView = UIImageView(image: screenImage)
+        view.backgroundColor = UIColor(named: "ypBlack")
+        view.addSubview(screenImageView)
+        screenImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            screenImageView.widthAnchor.constraint(equalToConstant: 72),
+            screenImageView.heightAnchor.constraint(equalToConstant: 76),
+            screenImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            screenImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             
-            let screenImageView = UIImageView(image: screenImage)
-            view.backgroundColor = UIColor(named: "ypBlack")
-            view.addSubview(screenImageView)
-            screenImageView.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                screenImageView.widthAnchor.constraint(equalToConstant: 72),
-                screenImageView.heightAnchor.constraint(equalToConstant: 76),
-                screenImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                screenImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-                
-            ])
-            
-            self.screenImageView = screenImageView
-        }
+        ])
+        
+        self.screenImageView = screenImageView
     }
+    func showViewController() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        guard
+            let navigationViewController = storyboard.instantiateViewController(
+                withIdentifier: "NavigationController"
+            ) as? UINavigationController,
+            let authViewController = navigationViewController.topViewController as? AuthViewController
+        else {
+            print("[\(#fileID)]:[\(#function)] -> Wrong AuthView configuration")
+            return
+        }
+        authViewController.delegate = self
+        navigationViewController.modalPresentationStyle = .fullScreen
+        present(navigationViewController, animated: true)
+    }
+}
+     
+     
+
 extension SplashViewController {
     func switchToTapBarController() {
         guard let window = UIApplication.shared.windows.first else {
