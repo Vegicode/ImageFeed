@@ -170,22 +170,6 @@
             </objects>
             <point key="canvasLocation" x="-2262" y="204"/>
         </scene>
-        <!--Profile View Controller-->
-        <scene sceneID="1VG-Rg-D4O">
-            <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="maR-oB-jor" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vgr-Ti-NHs">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Mc9-4Y-64B"/>
-                        <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="jJo-a1-5y2"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X9N-be-i5c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="240.45801526717557" y="541.54929577464793"/>
-        </scene>
         <!--Single Image View Controller-->
         <scene sceneID="3Hv-VT-1si">
             <objects>
@@ -346,7 +330,6 @@
         <image name="auth_screen_logo" width="60" height="60"/>
         <image name="nav_back_button" width="24" height="24"/>
         <image name="tab_editorial_active" width="31" height="30"/>
-        <image name="tab_profile_active" width="31" height="30"/>
         <namedColor name="ypBlack">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
