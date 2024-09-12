@@ -7,6 +7,22 @@
 
 import UIKit
 
+struct UserResult: Codable {
+    let profileImage: ProfileImage
+    
+    enum CodingKeys: String, CodingKey {
+        case profileImage = "profile_image"
+    }
+}
+
+//MARK: - Image
+
+struct ProfileImage: Codable {
+    let small: String
+    let medium: String
+    let large: String
+}
+
 
 enum imageError: Error {
     case invalidRequest
@@ -18,53 +34,66 @@ final class ProfileImageService {
     private init() {}
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     private var lastUsername: String?
+    private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private (set) var avatarURL: String?
     
-    func makeImageRequest(token: String, username: String) -> URLRequest? {
+    func makeImageRequest(for username: String) -> URLRequest? {
         guard let url = URL(string: "https://api.unsplash.com/users/\(username)")
         else {preconditionFailure("Error get url for image")}
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        guard let authToken = OAuth2TokenStorage().token else {
+            assertionFailure("failed to get authToken")
+            return nil
+        }
+        
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         return request
     }
     
     func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String, Error>) -> Void){
         assert(Thread.isMainThread)
-        
-        guard lastUsername != username else{
-            completion(.failure(imageError.invalidRequest))
-            return
-        }
         task?.cancel()
         
-        lastUsername = username
-        guard let request = makeImageRequest(token: token, username: username) else{
+        guard let request = makeImageRequest(for: username) else {
             completion(.failure(imageError.invalidRequest))
             return
         }
         
-        let task = URLSession.shared.objectTask(for: request){ [weak self] (result: Result<UserResult,Error>) in
-            DispatchQueue.main.async {
-                    switch result{
-                    case .success(let avatar):
-                        let avatarUrl = avatar.profileImage.large
-                        self?.avatarURL = avatarUrl
-                        completion(.success(avatarUrl))
-                    case .failure(let error):
-                        completion(.failure(error))
-                        print("[ProfileImageService.fetchProfileImage]: NetworkError - \(error.localizedDescription) for userID: \(username)")
-                    }
+        task = urlSession.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
+            guard let self else { return }
+            
+            switch result {
+            case .success(let userResult):
+                self.avatarURL = userResult.profileImage.medium
+                
+                guard let avatarURL = self.avatarURL else {
+                    print("failed to get avatarURL")
+                    return
                 }
-                self?.lastUsername = nil
-                self?.task = nil
+                
+                completion(.success(avatarURL))
+                self.task = nil
+                
+                NotificationCenter.default
+                    .post(
+                        name: ProfileImageService.didChangeNotification,
+                        object: self,
+                        userInfo: ["URL": avatarURL]
+                    )
+            case .failure(let error):
+                print("failed to get avatarURL: \(error.localizedDescription)")
+                completion(.failure(error))
             }
-            task.resume()
         }
+       
+        task?.resume()
+        
+    }
 //         )
 }
 
