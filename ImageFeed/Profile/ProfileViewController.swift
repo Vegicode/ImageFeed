@@ -125,16 +125,13 @@ extension ProfileViewController{
     }
     
     func createButton() {
-        let button = UIButton.systemButton(
-            with: UIImage(named: "Exit")!,
-            target: self,
-            action: #selector(Self.didTapLogoutButton)
-        )
+        let button = UIButton()
+        button.setImage(UIImage(named: "log out"), for: .normal)
         button.tintColor = UIColor(named: "ColorRed")
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        button.centerYAnchor.constraint(equalTo: profileImage!.centerYAnchor).isActive = true
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     func updateProfileDetails(profile: Profile){
