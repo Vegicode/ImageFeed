@@ -2,13 +2,17 @@ import UIKit
 
 final class ImagesListViewController: UIViewController {
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
+    let imagesListService = ImagesListService()
 
     @IBOutlet private var tableView: UITableView!
+    private var photos: [Photo] = []
+    private var imagesListServiceObserver: NSObjectProtocol?
 
-    private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    private let photosName: [String] = Array(0..<10).map{ "\($0)" }
 
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ru_RU")
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter
@@ -17,8 +21,16 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.rowHeight = 200
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        imagesListServiceObserver = NotificationCenter.default.addObserver(
+            forName: ImagesListService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else {return}
+            self.updateTableViewAnimated()
+        }
+        imagesListService.fetchPhotosNextPage()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -31,8 +43,8 @@ final class ImagesListViewController: UIViewController {
                 return
             }
             
-            let image = UIImage(named: photosName[indexPath.row])
-            viewController.image = image
+            
+            viewController.imageURL = photos[indexPath.row]
         } else {
             super.prepare(for: segue, sender: sender)
         }
@@ -54,21 +66,39 @@ extension ImagesListViewController: UITableViewDataSource {
         configCell(for: imageListCell, with: indexPath)
 
         return imageListCell
+        
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,forRowAt indexPath: IndexPath){
+        if indexPath.row + 1 == imagesListService.photos.count{
+            imagesListService.fetchPhotosNextPage()
+
+        }
     }
 }
 
 extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
-            return
+        
+        
+        let photo = photos[indexPath.row]
+        guard let imageUrl = URL(string: photo.thumbImageURL) else { return }
+
+        cell.cellImage.kf.setImage(with: imageUrl, placeholder: UIImage(named: "Loader"))
+        cell.cellImage.kf.indicatorType = .activity
+        
+        if let date = photo.createdAt{
+            let createdAtString = dateFormatter.string(from: date)
+            dateFormatter.string(from: date)
+            cell.dateLabel.text = createdAtString
+        } else {
+            cell.dateLabel.text = nil
         }
+        cell.setIsLiked(isLiked: photos[indexPath.item].isLiked)
+        
+    
 
-        cell.cellImage.image = image
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-
-        let isLiked = indexPath.row % 2 == 0
-        let likeImage = isLiked ? UIImage(named: "Active") : UIImage(named: "No Active")
-        cell.likeButton.setImage(likeImage, for: .normal)
+        
+        
     }
 }
 
@@ -88,5 +118,19 @@ extension ImagesListViewController: UITableViewDelegate {
         let scale = imageViewWidth / imageWidth
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
+    }
+    
+    func updateTableViewAnimated() {
+        let oldCount = photos.count
+        let newCount = imagesListService.photos.count
+        photos = imagesListService.photos
+        if oldCount != newCount {
+            tableView.performBatchUpdates {
+                let indexPath = (oldCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                tableView.insertRows(at: indexPath, with: .automatic)
+            } completion: { _ in }
+        }
     }
 }
