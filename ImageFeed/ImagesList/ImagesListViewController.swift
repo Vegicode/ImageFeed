@@ -98,41 +98,41 @@ extension ImagesListViewController {
         cell.setIsLiked(isLiked: photos[indexPath.item].isLiked)
         
     }
-    
-     
-}
-
-extension ImagesListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
-            return 0
-        }
-        
-        let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-        let imageWidth = image.size.width
-        let scale = imageViewWidth / imageWidth
-        let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
-        return cellHeight
-    }
-    
     func updateTableViewAnimated() {
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos
         if oldCount != newCount {
             tableView.performBatchUpdates {
-                let indexPath = (oldCount..<newCount).map { i in
+                let indexPaths = (oldCount..<newCount).map { i in
                     IndexPath(row: i, section: 0)
                 }
-                tableView.insertRows(at: indexPath, with: .automatic)
+                tableView.insertRows(at: indexPaths, with: .automatic)
             } completion: { _ in }
         }
     }
+    
+     
+}
+
+extension ImagesListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let image = photos[indexPath.row]
+        
+        let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
+        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
+        let imageWidth = image.size.width
+        let scale = imageViewWidth / imageWidth
+        let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
+        
+        return cellHeight
+    }
+    
 }
 
 extension ImagesListViewController: ImagesListCellDelegate {
