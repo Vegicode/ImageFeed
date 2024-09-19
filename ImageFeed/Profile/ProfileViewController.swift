@@ -1,4 +1,5 @@
 import UIKit
+import WebKit
 import Kingfisher
 import SwiftKeychainWrapper
 
@@ -46,10 +47,10 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    var logoutButton: UIButton = {
+    let logoutButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Exit"), for: .normal)
-                                    
+        button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
         button.tintColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -140,13 +141,43 @@ class ProfileViewController: UIViewController {
         present(alert, animated: true)
     }
     
+       func logout() {
+        cleanCookies()
+        KeychainWrapper.standard.removeObject(forKey: "Bearer Token")
+        
+        guard let window = UIApplication.shared.windows.first else {
+            fatalError("Invalid Configuration")
+        }
+        window.rootViewController = SplashViewController()
+        window.makeKeyAndVisible()
+    }
+    func cleanCookies(){
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+            }
+        }
+    }
+    private func showAlertLogout() {
+        let alert = UIAlertController(title: "Пока",
+                                      message: "Уверены что хотите выйти?",
+                                      preferredStyle: .alert)
+        let yesButton = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            self?.logout()
+        }
+        let noButton = UIAlertAction(title: "Нет", style: .default, handler: nil)
+        alert.addAction(yesButton)
+        alert.addAction(noButton)
+        present(alert, animated: true)
+    }
+    
+    
     @objc
     private func didTapLogoutButton() {
-       showAlert()
+       showAlertLogout()
         
         
-        KeychainWrapper.standard.removeObject(forKey: "Bearer Token")
-    
     }
   
 }
