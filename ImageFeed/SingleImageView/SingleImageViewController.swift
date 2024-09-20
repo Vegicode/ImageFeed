@@ -4,12 +4,11 @@ final class SingleImageViewController: UIViewController {
     var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
-            
             imageView.image = image
-            imageView.frame.size = image.size
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
+    var imageURL: Photo?
 
     @IBOutlet private var imageView: UIImageView!
 
@@ -21,11 +20,26 @@ final class SingleImageViewController: UIViewController {
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
         
-        guard let image else { return }
-        imageView.image = image
-        imageView.frame.size = image.size
-        rescaleAndCenterImageInScrollView(image: image)
+        guard let imageURL else { return }
+        
+        openImage(photo: imageURL)
 
+    }
+    private func openImage(photo: Photo) {
+        
+        UIBlockingProgressHUD.show()
+        imageView.kf.setImage(with: URL(string: photo.largeImageURL)) {[weak self] result in
+            UIBlockingProgressHUD.dismiss()
+            
+            guard let self = self else {return}
+            switch result {
+            case .success(let imageResult):
+                self.rescaleAndCenterImageInScrollView(image: imageResult.image)
+            case .failure:
+                print("[SingleImageViewController]:[setImage]: Error getting single image")
+            }
+        }
+        imageView.frame.size = photo.size
     }
     
     @IBAction func didTapBackButton(_ sender: Any) {
