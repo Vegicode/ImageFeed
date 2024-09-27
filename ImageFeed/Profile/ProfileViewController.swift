@@ -160,7 +160,7 @@ class ProfileViewController: UIViewController {
         }
     }
     private func showAlertLogout() {
-        let alert = UIAlertController(title: "Пока",
+        let alert = UIAlertController(title: "Пока, пока!",
                                       message: "Уверены что хотите выйти?",
                                       preferredStyle: .alert)
         let yesButton = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
