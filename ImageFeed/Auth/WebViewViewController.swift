@@ -4,9 +4,9 @@
 //
 //  Created by Mac on 06.08.2024.
 //
-
-import UIKit
 import WebKit
+import UIKit
+
 
 protocol WebViewViewControllerProtocol: AnyObject {
     var presenter: WebViewPresenterProtocol? { get set }
@@ -23,7 +23,7 @@ protocol WebViewViewControllerDelegate: AnyObject {
 }
 
 final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
-    var presenter: (any WebViewPresenterProtocol)?
+    var presenter: WebViewPresenterProtocol?
     
     func load(request: URLRequest) {
         webView.load(request)
@@ -100,6 +100,13 @@ extension WebViewViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
+    func code(from navigationAction: WKNavigationAction) -> String? {
+        if let url = navigationAction.request.url{
+            return presenter?.code(from: url)
+        }
+        return nil
+    }
+       
 }
 
 private extension WebViewViewController {

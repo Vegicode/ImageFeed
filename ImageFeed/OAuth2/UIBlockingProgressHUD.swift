@@ -1,11 +1,3 @@
-//
-//  UIBlockingProgressHUD.swift
-//  ImageFeed
-//
-//  Created by Mac on 27.08.2024.
-//
-
-
 import UIKit
 import ProgressHUD
 

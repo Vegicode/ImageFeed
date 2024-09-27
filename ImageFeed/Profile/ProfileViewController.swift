@@ -3,11 +3,26 @@ import WebKit
 import Kingfisher
 import SwiftKeychainWrapper
 
-class ProfileViewController: UIViewController {
+public protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfilePresenterProtocol? { get set }
+    func updateAvatar()
+    func logout()
+    func showAlert(alert: UIAlertController)
+    func addSubviews()
+    func addConstrains()
+    func configure(_ presenter: ProfilePresenterProtocol)
+}
+
+
+class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+    func showAlert(alert: UIAlertController) {
+        present(alert, animated: true)
+    }
+    
     
     private var profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
-    
+    internal var presenter: ProfilePresenterProtocol?
     
     var avatarImageView: UIImageView = {
         let avatar = UIImageView()
@@ -60,7 +75,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "YP Black")
+        view.backgroundColor = UIColor(named: "ypBlack")
         
         addSubviews()
         addConstrains()
@@ -87,7 +102,7 @@ class ProfileViewController: UIViewController {
         descriptionLabel.text = profile.bio
     }
     
-    private func updateAvatar() {
+    internal func updateAvatar() {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL)
@@ -96,7 +111,7 @@ class ProfileViewController: UIViewController {
             return
         }
       
-        let procesoor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: UIColor(named: "YP Black"))
+        let procesoor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: UIColor(named: "White"))
         
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url,
@@ -115,7 +130,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(logoutButton)
     }
     
-    private func addConstrains() {
+    internal func addConstrains() {
         avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 76).isActive = true
         avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         
@@ -179,5 +194,10 @@ class ProfileViewController: UIViewController {
         
         
     }
+    
+    func configure(_ presenter: ProfilePresenterProtocol){
+        
+    }
+    
   
 }
