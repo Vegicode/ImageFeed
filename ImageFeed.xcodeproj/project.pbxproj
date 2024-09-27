@@ -104,6 +104,7 @@
 		502D32A82C70DA1300C7BFAE /* OAuth2 */ = {
 			isa = PBXGroup;
 			children = (
+				502D32B52C7DE0CD00C7BFAE /* UIBlockingProgressHUD.swift */,
 				502D32A92C70DA4500C7BFAE /* OAuth2Service.swift */,
 				502D32AE2C71301C00C7BFAE /* OAuth2TokenStorage.swift */,
 				50BC52232C899DC90064A458 /* OAuthTokenResponseBody.swift */,
@@ -189,7 +190,6 @@
 				50C6AC032C44F92600A2D4CF /* LaunchScreen.storyboard */,
 				50C6AC062C44F92600A2D4CF /* Info.plist */,
 				507A1E2E2C4F91E1003D572E /* Assets.xcassets 10-21-41-425.xcassets */,
-				502D32B52C7DE0CD00C7BFAE /* UIBlockingProgressHUD.swift */,
 				50BC52192C86E61A0064A458 /* TapBarController.swift */,
 				5093BC5F2C99961B00BCE0C7 /* CustomDateFormatter.swift */,
 			);
