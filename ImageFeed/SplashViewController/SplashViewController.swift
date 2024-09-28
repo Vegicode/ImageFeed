@@ -23,12 +23,12 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         UIBlockingProgressHUD.show()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if let token = self.oauth2TokenStorage.token {
-                self.fetchProfile(token: token)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            if let token = self?.oauth2TokenStorage.token {
+                self?.fetchProfile(token: token)
                 UIBlockingProgressHUD.dismiss()
             } else {
-                self.showViewController()
+                self?.showViewController()
                 UIBlockingProgressHUD.dismiss()
             }
         }
