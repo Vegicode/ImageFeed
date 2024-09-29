@@ -26,7 +26,7 @@ struct ProfileResult: Codable {
     }
 }
 
-public struct Profile {
+struct Profile {
     let username: String
     let name: String
     let loginName: String

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -66,6 +66,7 @@
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="Active"/>
                                                     <connections>
+                                                        <action selector="clickLikeButton:" destination="yXF-LQ-wdh" eventType="touchUpInside" id="Qna-K6-7qv"/>
                                                         <action selector="likeButtonClicked:" destination="yXF-LQ-wdh" eventType="touchUpInside" id="Ug8-RZ-dj9"/>
                                                     </connections>
                                                 </button>
@@ -132,6 +133,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTm-vi-CAS">
+                                <rect key="frame" x="166" y="396" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="auth_screen_logo"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMs-iH-CoR">
                                 <rect key="frame" x="16" y="743" width="361" height="48"/>
                                 <constraints>
@@ -152,20 +159,12 @@
                                     <segue destination="MM9-OV-8Lx" kind="show" identifier="ShowWebView" id="TPb-di-xRH"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="auth_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="v8k-ug-1vC">
-                                <rect key="frame" x="166.66666666666666" y="396" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="v8k-ug-1vC" secondAttribute="height" multiplier="1:1" id="NUJ-Jx-TjD"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xHH-YM-ysm"/>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="WMs-iH-CoR" firstAttribute="leading" secondItem="xHH-YM-ysm" secondAttribute="leading" constant="16" id="9fF-En-Wdd"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="WMs-iH-CoR" secondAttribute="bottom" constant="27" id="HdY-lJ-EbR"/>
-                            <constraint firstItem="v8k-ug-1vC" firstAttribute="centerX" secondItem="l5L-Ed-oc8" secondAttribute="centerX" id="XLg-Fl-6Ci"/>
-                            <constraint firstItem="v8k-ug-1vC" firstAttribute="centerY" secondItem="l5L-Ed-oc8" secondAttribute="centerY" id="doe-E2-azf"/>
+                            <constraint firstItem="WMs-iH-CoR" firstAttribute="top" secondItem="xHH-YM-ysm" secondAttribute="top" constant="640" id="tYE-EG-XOq"/>
                             <constraint firstItem="xHH-YM-ysm" firstAttribute="trailing" secondItem="WMs-iH-CoR" secondAttribute="trailing" constant="16" id="vpT-cE-ihT"/>
                         </constraints>
                     </view>
@@ -215,11 +214,8 @@
                                     <constraint firstAttribute="height" constant="44" id="Rcd-Bg-lWC"/>
                                     <constraint firstAttribute="width" constant="44" id="rYY-uW-KBI"/>
                                 </constraints>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="nav_back_button">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="normal" image="nav_back_button"/>
                                 <connections>
                                     <action selector="didTapBackButton:" destination="I6U-QB-We7" eventType="touchUpInside" id="IEQ-68-6hk"/>
                                 </connections>
@@ -230,10 +226,10 @@
                         <constraints>
                             <constraint firstItem="0p4-So-zpG" firstAttribute="centerX" secondItem="qfv-gL-rB0" secondAttribute="centerX" id="Cv4-2T-tS8"/>
                             <constraint firstItem="qfv-gL-rB0" firstAttribute="leading" secondItem="0PA-bP-BID" secondAttribute="leading" id="G5f-9R-BCH"/>
-                            <constraint firstAttribute="bottom" secondItem="0PA-bP-BID" secondAttribute="bottom" id="GMO-F5-GMW"/>
+                            <constraint firstItem="0PA-bP-BID" firstAttribute="bottom" secondItem="qfv-gL-rB0" secondAttribute="bottom" id="T7e-8L-jQV"/>
+                            <constraint firstItem="qfv-gL-rB0" firstAttribute="top" secondItem="0PA-bP-BID" secondAttribute="top" id="YDU-mw-CqZ"/>
                             <constraint firstItem="0PA-bP-BID" firstAttribute="trailing" secondItem="qfv-gL-rB0" secondAttribute="trailing" id="aY0-fC-bAO"/>
                             <constraint firstItem="MgL-b5-8Eg" firstAttribute="leading" secondItem="qfv-gL-rB0" secondAttribute="leading" id="d8r-5z-Sma"/>
-                            <constraint firstItem="0PA-bP-BID" firstAttribute="top" secondItem="itD-jh-80i" secondAttribute="top" id="jRd-Ye-TYp"/>
                             <constraint firstItem="qfv-gL-rB0" firstAttribute="bottom" secondItem="0p4-So-zpG" secondAttribute="bottom" constant="17" id="l3R-AC-YRx"/>
                             <constraint firstItem="MgL-b5-8Eg" firstAttribute="top" secondItem="qfv-gL-rB0" secondAttribute="top" id="yQN-KD-ssH"/>
                         </constraints>
