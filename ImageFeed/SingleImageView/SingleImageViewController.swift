@@ -55,7 +55,6 @@ final class SingleImageViewController: UIViewController {
         present(share, animated: true, completion: nil)
     }
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
-        imageView.bounds.size = image.size
         let minZoomScale = scrollView.minimumZoomScale
         let maxZoomScale = scrollView.maximumZoomScale
         view.layoutIfNeeded()
@@ -65,27 +64,21 @@ final class SingleImageViewController: UIViewController {
         let vScale = visibleRectSize.height / imageSize.height
         let scale = min(maxZoomScale, max(minZoomScale, min(hScale, vScale)))
         scrollView.setZoomScale(scale, animated: false)
-        let newContentSize = scrollView.contentSize
-                let x = (newContentSize.width - visibleRectSize.width) / 2
-                let y = (newContentSize.height - visibleRectSize.height) / 2
-                scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
+        scrollView.layoutIfNeeded()
+        if imageView.frame.height <= scrollView.frame.height {
+                let shiftHeight = scrollView.frame.height/2.0 - scrollView.contentSize.height/2.0
+                scrollView.contentInset.top = shiftHeight
+            }
+            if imageView.frame.width <= scrollView.frame.width {
+                let shiftWidth = scrollView.frame.width/2.0 - scrollView.contentSize.width/2.0
+                scrollView.contentInset.left = shiftWidth
+            }
     }
 }
 extension SingleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         imageView
     }
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-            let verticalInset = max((scrollView.bounds.height - scrollView.contentSize.height) / 2, 0)
-            let horizontalInset = max((scrollView.bounds.width - scrollView.contentSize.width) / 2, 0)
-
-            scrollView.contentInset = UIEdgeInsets(
-                top: verticalInset,
-                left: horizontalInset,
-                bottom: verticalInset,
-                right: horizontalInset
-            )
-        }
     
 }
 
