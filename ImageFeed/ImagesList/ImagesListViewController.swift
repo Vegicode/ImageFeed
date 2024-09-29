@@ -1,5 +1,11 @@
 import UIKit
 
+public protocol ImageListViewControllerProtocol: AnyObject {
+    var presenter: ImageListPresenterProtocol? { get set }
+    func updateTableViewAnimated(_ indexPaths: [IndexPath])
+}
+
+
 final class ImagesListViewController: UIViewController {
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     let imagesListService = ImagesListService()
