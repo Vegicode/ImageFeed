@@ -111,7 +111,7 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
             return
         }
       
-        let procesoor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: UIColor(named: "White"))
+        let procesoor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: UIColor(named: "ypBlack"))
         
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url,
@@ -175,7 +175,7 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         }
     }
     private func showAlertLogout() {
-        let alert = UIAlertController(title: "Пока",
+        let alert = UIAlertController(title: "Пока, Пока!",
                                       message: "Уверены что хотите выйти?",
                                       preferredStyle: .alert)
         let yesButton = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
