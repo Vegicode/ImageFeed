@@ -11,8 +11,10 @@ final class ImagesListViewController: UIViewController {
     let imagesListService = ImagesListService()
 
     @IBOutlet private var tableView: UITableView!
+    var presenter: ImageListPresenterProtocol?
     private var photos: [Photo] = []
     private var imagesListServiceObserver: NSObjectProtocol?
+    
 
     private let photosName: [String] = Array(0..<10).map{ "\($0)" }
 
