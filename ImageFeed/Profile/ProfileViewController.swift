@@ -60,7 +60,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "YP Black")
+        view.backgroundColor = UIColor(named: "ypBlack")
         
         addSubviews()
         addConstrains()
@@ -96,7 +96,7 @@ class ProfileViewController: UIViewController {
             return
         }
       
-        let procesoor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: UIColor(named: "YP Black"))
+        let procesoor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: UIColor(named: "ypBlack"))
         
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url,
@@ -160,7 +160,7 @@ class ProfileViewController: UIViewController {
         }
     }
     private func showAlertLogout() {
-        let alert = UIAlertController(title: "Пока",
+        let alert = UIAlertController(title: "Пока, пока!",
                                       message: "Уверены что хотите выйти?",
                                       preferredStyle: .alert)
         let yesButton = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
