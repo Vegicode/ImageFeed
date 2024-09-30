@@ -17,7 +17,7 @@ final class WebViewPresenterSpy: WebViewPresenterProtocol {
     }
     
     func didUpdateProgressValue(_ newValue: Double) {
-        <#code#>
+        
     }
     
     func code(from url: URL) -> String? {
