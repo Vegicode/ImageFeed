@@ -18,7 +18,6 @@ final class ImageListTest: XCTestCase {
         let presenter = ImagesListPresenterSpy()
         viewController.presenter = presenter
         presenter.view = viewController as! any ImageListViewControllerProtocol
-        
         //When
         _ = viewController.view
         
