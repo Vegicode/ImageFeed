@@ -6,44 +6,43 @@
 //
 
 import UIKit
+import ProgressHUD
+
 
 final class SplashViewController: UIViewController {
     private let ShowAuthenticationScreenSegueIdentifier = "showAuthenticationScreen"
+    
     private let oauth2TokenStorage = OAuth2TokenStorage()
-    let service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private var screenImageView: UIImageView?
     private let storage = OAuth2TokenStorage()
     
-    
+   
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         UIBlockingProgressHUD.show()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            
             if let token = self?.oauth2TokenStorage.token {
-                          self?.fetchProfile(token: token)
-                          UIBlockingProgressHUD.dismiss()
-                           
-                           
-                       } else {
-                           self?.showViewController()
-                           UIBlockingProgressHUD.dismiss()
-                       }
-            
+                self?.fetchProfile(token: token)
+                UIBlockingProgressHUD.dismiss()
+            } else {
+                self?.showViewController()
+                UIBlockingProgressHUD.dismiss()
+            }
         }
     }
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            setNeedsStatusBarAppearanceUpdate()
-        }
-    
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
     
     override func viewDidLoad() {
-            super.viewDidLoad()
-            createAuthView()
-        }
+           super.viewDidLoad()
+        
+           createAuthView()
+       }
     
 }
 
