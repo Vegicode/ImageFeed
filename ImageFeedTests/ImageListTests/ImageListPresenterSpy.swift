@@ -5,8 +5,8 @@
 //  Created by Mac on 30.09.2024.
 //
 
-@testable import ImageFeed
 import UIKit
+@testable import ImageFeed
 
 final class ImagesListPresenterSpy: ImageListPresenterProtocol {
     
