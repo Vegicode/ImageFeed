@@ -17,7 +17,7 @@ final class ImageListTest: XCTestCase {
         let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
         let presenter = ImagesListPresenterSpy()
         viewController.presenter = presenter
-        presenter.view = viewController as! any ImageListViewControllerProtocol
+        presenter.view = viewController
         
         //When
         _ = viewController.view

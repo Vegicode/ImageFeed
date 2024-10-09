@@ -56,49 +56,42 @@ final class ImageFeedUITests: XCTestCase {
     }
     
     func testFeed() throws {
+        
         let tablesQuery = app.tables
-           
-           let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
-           cell.swipeUp()
-           
-           sleep(2)
-           
-           let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
-           
-           cellToLike.buttons["likeButton"].tap()
-           
-           sleep(2)
-           
-           cellToLike.tap()
-           
-           sleep(2)
-           
-           let image = app.scrollViews.images.element(boundBy: 0)
-           // Zoom in
-           image.pinch(withScale: 3, velocity: 1) // zoom in
-           // Zoom out
-           image.pinch(withScale: 0.5, velocity: -1)
-           
-           let navBackButtonWhiteButton = app.buttons["backButton"]
-           navBackButtonWhiteButton.tap()
+        
+        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        cell.swipeUp()
+        
+        sleep(2)
+        
+        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
+        
+        cellToLike.buttons["Active"].tap()
+        cellToLike.buttons["No Active"].tap()
+        
+        sleep(2)
+        
+        cellToLike.tap()
+        
+        sleep(2)
+        
+        let image = app.scrollViews.images.element(boundBy: 0)
+        image.pinch(withScale: 3, velocity: 1)
+        image.pinch(withScale: 0.5, velocity: -1)
+        
+        let navBackButtonWhiteButton = app.buttons["nav back button white"]
+        navBackButtonWhiteButton.tap()
     }
     
     func testProfile() throws {
-        sleep(3)
+        sleep(6)
         app.tabBars.buttons.element(boundBy: 1).tap()
         
-        XCTAssertTrue(app.staticTexts["Name LastName"].exists)
-        XCTAssertTrue(app.staticTexts["@..."].exists)
+        XCTAssertTrue(app.staticTexts["VadEgi"].exists)
+        XCTAssertTrue(app.staticTexts["@vegicode"].exists)
         
-        app.buttons["ExitButton"].tap()
+        app.buttons["Exit"].tap()
         
-        let yesButton = app.alerts.buttons["Да"]
-        XCTAssertTrue(yesButton.waitForExistence(timeout: 5))
-        yesButton.tap()
-        
-        let loginButton = app.buttons["Authenticate"]
-        XCTAssertTrue(loginButton.waitForExistence(timeout: 10))
-        
-        loginButton.tap()
+        app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
     }
 }

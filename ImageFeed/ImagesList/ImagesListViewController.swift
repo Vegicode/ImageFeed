@@ -6,18 +6,20 @@ public protocol ImageListViewControllerProtocol: AnyObject {
 }
 
 
-final class ImagesListViewController: UIViewController {
+final class ImagesListViewController: UIViewController, ImageListViewControllerProtocol {
+    
+    
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     let imagesListService = ImagesListService()
-
+    
     @IBOutlet private var tableView: UITableView!
     var presenter: ImageListPresenterProtocol?
     private var photos: [Photo] = []
     private var imagesListServiceObserver: NSObjectProtocol?
     
-
+    
     private let photosName: [String] = Array(0..<10).map{ "\($0)" }
-
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ru_RU")
@@ -25,10 +27,10 @@ final class ImagesListViewController: UIViewController {
         formatter.timeStyle = .none
         return formatter
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         imagesListServiceObserver = NotificationCenter.default.addObserver(
             forName: ImagesListService.didChangeNotification,
@@ -40,7 +42,7 @@ final class ImagesListViewController: UIViewController {
         }
         imagesListService.fetchPhotosNextPage()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard
@@ -57,8 +59,12 @@ final class ImagesListViewController: UIViewController {
             super.prepare(for: segue, sender: sender)
         }
     }
+    func updateTableViewAnimated(_ indexPaths: [IndexPath]) {
+        tableView.performBatchUpdates {
+            tableView.insertRows(at: indexPaths, with: .automatic)
+        } completion: { _ in }
+    }
 }
-
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photos.count

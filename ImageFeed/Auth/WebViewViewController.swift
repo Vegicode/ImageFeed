@@ -35,19 +35,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
     weak var delegate: WebViewViewControllerDelegate?
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        webView.navigationDelegate = self
-
-        configureBackButton()
-        presenter?.viewDidLoad()
-        
-        estimatedProgressObservation = webView.observe(\.estimatedProgress, options: [], changeHandler: { [weak self] _, _ in guard let self = self else { return }
-        })
-        
-
-    }
+    
     
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button") // 1
@@ -60,6 +48,19 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     }
     
+    override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            webView.navigationDelegate = self
+
+            configureBackButton()
+            presenter?.viewDidLoad()
+            
+            estimatedProgressObservation = webView.observe(\.estimatedProgress, options: [], changeHandler: { [weak self] _, _ in guard let self = self else { return }
+            })
+            
+
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)

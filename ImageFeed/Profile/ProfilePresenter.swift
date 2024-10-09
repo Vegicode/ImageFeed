@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol ProfilePresenterProtocol {
+public protocol ProfilePresenterProtocol: AnyObject {
     var view: ProfileViewControllerProtocol? { get set }
     func viewDidLoad()
     func logout()
@@ -16,12 +16,17 @@ public protocol ProfilePresenterProtocol {
 }
 
 final class ProfilePresenter: ProfilePresenterProtocol{
+    
+    
     var view: ProfileViewControllerProtocol?
     
     func viewDidLoad() {
         view?.addSubviews()
         view?.addConstrains()
     }
+    
+    
+    
     
     func logout() {
         let alert = UIAlertController(title: "Пока, Пока!",
