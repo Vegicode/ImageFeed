@@ -37,12 +37,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
     
     
     
-    private func configureBackButton() {
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button") // 1
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button") // 2
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil) // 3
-        navigationItem.backBarButtonItem?.tintColor = UIColor(named: "ypBlack") // 4
-    }
+   
     
     enum WebViewConsants{
         static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
@@ -53,7 +48,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
             
             webView.navigationDelegate = self
 
-            configureBackButton()
+            
             presenter?.viewDidLoad()
             
             estimatedProgressObservation = webView.observe(\.estimatedProgress, options: [], changeHandler: { [weak self] _, _ in guard let self = self else { return }

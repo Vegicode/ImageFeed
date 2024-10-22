@@ -8,16 +8,22 @@
 import UIKit
 import ProgressHUD
 
-
-
-
 final class AuthViewController: UIViewController{
 
     private let ShowWebViewSegueIdentifier = "ShowWebView"
     private let storage = OAuth2TokenStorage()
     let oauth2Service = OAuth2Service.shared
     weak var delegate: AuthViewControllerDelegate?
-
+    
+    
+    @IBOutlet var inButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureBackButton()
+        inButton.accessibilityIdentifier = "Authenticate"
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ShowWebViewSegueIdentifier {
             guard
@@ -32,9 +38,15 @@ final class AuthViewController: UIViewController{
         } else {
             super.prepare(for: segue, sender: sender)
         }
-        
-
+    
     }
+    private func configureBackButton() {
+        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button")
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = .black
+    }
+    
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {

@@ -60,14 +60,16 @@ final class ImageFeedUITests: XCTestCase {
         let tablesQuery = app.tables
         
         let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
-        cell.swipeUp()
-        
-        sleep(2)
         
         let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
         
-        cellToLike.buttons["Active"].tap()
+        sleep(2)
+        
+        
+        cell.swipeUp()
+
         cellToLike.buttons["No Active"].tap()
+        
         
         sleep(2)
         
@@ -84,8 +86,8 @@ final class ImageFeedUITests: XCTestCase {
     }
     
     func testProfile() throws {
-        sleep(6)
-        app.tabBars.buttons.element(boundBy: 1).tap()
+        sleep(3)
+        app.tabBars.buttons.element(boundBy: 0).tap()
         
         XCTAssertTrue(app.staticTexts["VadEgi"].exists)
         XCTAssertTrue(app.staticTexts["@vegicode"].exists)

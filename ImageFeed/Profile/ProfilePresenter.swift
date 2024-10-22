@@ -29,7 +29,7 @@ final class ProfilePresenter: ProfilePresenterProtocol{
     
     
     func logout() {
-        let alert = UIAlertController(title: "Пока, Пока!",
+        let alert = UIAlertController(title: "Пока, пока!",
                                       message: "Уверены что хотите выйти?",
                                       preferredStyle: .alert)
         let yesButton = UIAlertAction(title: "Да", style: .default) { _ in

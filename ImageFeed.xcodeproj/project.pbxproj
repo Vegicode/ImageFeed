@@ -100,6 +100,7 @@
 		5093BC5F2C99961B00BCE0C7 /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
 		5099DE942C47B362005BF72F /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		5099DE9D2C4A72CC005BF72F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		50A272492CC0320100D8FEB9 /* ImageFeed.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ImageFeed.xctestplan; sourceTree = "<group>"; };
 		50BC52192C86E61A0064A458 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
 		50BC521F2C8886190064A458 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 		50BC52232C899DC90064A458 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
@@ -252,6 +253,7 @@
 		50C6ABEC2C44F91D00A2D4CF = {
 			isa = PBXGroup;
 			children = (
+				50A272492CC0320100D8FEB9 /* ImageFeed.xctestplan */,
 				50C6ABF72C44F91D00A2D4CF /* ImageFeed */,
 				503B62BA2CB053840072AB95 /* ImageFeedTests */,
 				503B62E92CB2F70A0072AB95 /* ImageFeedUITests */,
