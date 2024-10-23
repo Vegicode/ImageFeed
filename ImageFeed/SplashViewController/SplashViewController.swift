@@ -136,7 +136,7 @@ extension SplashViewController: AuthViewControllerDelegate{
           guard let self = self else { return }
           switch result {
           case .success(let profile):
-              ProfileImageService.shared.fetchProfileImageURL(token: token, username: profile.username) { _ in }
+              ProfileImageService.shared.fetchProfileImageURL(username: profile.username) { _ in }
               self.switchToTapBarController()
           case .failure(let error):
               print(error.localizedDescription)

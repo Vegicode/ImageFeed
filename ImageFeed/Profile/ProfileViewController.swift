@@ -15,15 +15,14 @@ public protocol ProfileViewControllerProtocol: AnyObject {
 
 
 class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
-    func showAlert(alert: UIAlertController) {
-        present(alert, animated: true)
-    }
     
+   
     
+    var presenter: ProfilePresenterProtocol?
+
     private var profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
-    internal var presenter: ProfilePresenterProtocol?
-    
+
     var avatarImageView: UIImageView = {
         let avatar = UIImageView()
         avatar.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +61,7 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         return label
     }()
     
-    let logoutButton: UIButton = {
+    @objc let logoutButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Exit"), for: .normal)
         button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
@@ -77,24 +76,39 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "ypBlack")
         
-        addSubviews()
-        addConstrains()
+        presenter?.viewDidLoad()
+       // addSubviews()
+       // addConstrains()
         
-        guard let profile = profileService.profile else {
-            print("No profile data found")
-            return
-        }
+        
+        
+        
+        guard let profile = presenter?.getProfile() else {
+                    print("No profile data found")
+                    return
+                }
         updateProfileDetails(profile: profile)
         
         profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil, queue: .main) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            }
+                    .addObserver(
+                        forName: ProfileImageService.didChangeNotification,
+                        object: nil, queue: .main) { [weak self] _ in
+                        guard let self = self else { return }
+                        self.updateAvatar()
+                    }
+               
         updateAvatar()
+        
+        logoutButton.accessibilityIdentifier = "Exit"
+        logoutButton.addTarget(self, action: #selector(getter: logoutButton), for: .touchUpInside)
+        
     }
+    
+    
+    func configure(_ presenter: ProfilePresenterProtocol){
+               self.presenter = presenter
+               self.presenter?.view = self
+           }
     
     private func updateProfileDetails(profile: Profile) {
         namelabel.text = profile.name
@@ -102,14 +116,9 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         descriptionLabel.text = profile.bio
     }
     
-    internal func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
-        else {
-            print("Error -", #fileID, #function)
-            return
-        }
+    
+    func updateAvatar() {
+        let url = presenter?.getAvatarUrl()
       
         let procesoor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: UIColor(named: "ypBlack"))
         
@@ -130,7 +139,7 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         view.addSubview(logoutButton)
     }
     
-    internal func addConstrains() {
+    func addConstrains() {
         avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 76).isActive = true
         avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         
@@ -147,16 +156,9 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
     }
     
-    func showAlert() {
-        let alert = UIAlertController(title: "Выход из профиля", message: "Закройте окно приложения и перезайдите", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "ОК", style: .default)
-        
-        alert.addAction(action)
-        present(alert, animated: true)
-    }
     
-       func logout() {
+    
+    func logout() {
         cleanCookies()
         KeychainWrapper.standard.removeObject(forKey: "Bearer Token")
         
@@ -174,30 +176,20 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
             }
         }
     }
-    private func showAlertLogout() {
-        let alert = UIAlertController(title: "Пока, Пока!",
-                                      message: "Уверены что хотите выйти?",
-                                      preferredStyle: .alert)
-        let yesButton = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
-            self?.logout()
-        }
-        let noButton = UIAlertAction(title: "Нет", style: .default, handler: nil)
-        alert.addAction(yesButton)
-        alert.addAction(noButton)
+    
+    func showAlert(alert: UIAlertController) {
         present(alert, animated: true)
     }
     
     
     @objc
     private func didTapLogoutButton() {
-       showAlertLogout()
+        presenter?.logout()
         
         
     }
     
-    func configure(_ presenter: ProfilePresenterProtocol){
-        
-    }
+   
     
   
 }

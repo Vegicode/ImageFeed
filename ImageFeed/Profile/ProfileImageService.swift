@@ -7,6 +7,8 @@
 
 import UIKit
 
+//MARK: - User Result
+
 struct UserResult: Codable {
     let profileImage: ProfileImage
     
@@ -23,44 +25,25 @@ struct ProfileImage: Codable {
     let large: String
 }
 
-
-enum imageError: Error {
-    case invalidRequest
-}
-
-
+//MARK: - ProfileImageService
 final class ProfileImageService {
+    
     static let shared = ProfileImageService()
-    private init() {}
-    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
-    private var lastUsername: String?
+    private (set) var avatarURL: String?
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
-    private (set) var avatarURL: String?
+    private init() { }
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
-    func makeImageRequest(for username: String) -> URLRequest? {
-        guard let url = URL(string: "https://api.unsplash.com/users/\(username)")
-        else {preconditionFailure("Error get url for image")}
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        guard let authToken = OAuth2TokenStorage().token else {
-            assertionFailure("failed to get authToken")
-            return nil
-        }
-        
-        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
-        
-        return request
-    }
     
-    func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String, Error>) -> Void){
+    //MARK: - fetchProfileImageURL
+    
+    func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         task?.cancel()
         
         guard let request = makeImageRequest(for: username) else {
-            completion(.failure(imageError.invalidRequest))
+            completion(.failure(ProfileServiceError.invalidRequest))
             return
         }
         
@@ -94,6 +77,26 @@ final class ProfileImageService {
         task?.resume()
         
     }
-//         )
+    
+    //MARK: - make request
+    
+    private func makeImageRequest(for username: String) -> URLRequest? {
+        let baseURL = URL(string: "users/\(username)", relativeTo: Constants.defaultBaseURL)
+        
+        guard let url = baseURL else {
+            print("Failed to create URL")
+            return nil
+        }
+        
+        guard let authToken = OAuth2TokenStorage().token else {
+            assertionFailure("failed to get authToken")
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+        return request
+    }
+    
 }
-

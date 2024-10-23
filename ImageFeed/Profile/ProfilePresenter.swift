@@ -16,17 +16,12 @@ public protocol ProfilePresenterProtocol: AnyObject {
 }
 
 final class ProfilePresenter: ProfilePresenterProtocol{
-    
-    
-    var view: ProfileViewControllerProtocol?
+    weak var view: ProfileViewControllerProtocol?
     
     func viewDidLoad() {
         view?.addSubviews()
         view?.addConstrains()
     }
-    
-    
-    
     
     func logout() {
         let alert = UIAlertController(title: "Пока, пока!",
