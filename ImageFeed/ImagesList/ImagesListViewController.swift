@@ -59,6 +59,13 @@ final class ImagesListViewController: UIViewController, ImageListViewControllerP
             super.prepare(for: segue, sender: sender)
         }
     }
+    
+    func configure(_ presenter: ImageListPresenterProtocol) {
+        self.presenter = presenter
+        self.presenter?.view = self
+    }
+    
+    
     func updateTableViewAnimated(_ indexPaths: [IndexPath]) {
         tableView.performBatchUpdates {
             tableView.insertRows(at: indexPaths, with: .automatic)

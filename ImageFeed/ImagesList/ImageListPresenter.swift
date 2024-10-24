@@ -15,7 +15,7 @@ public protocol ImageListPresenterProtocol: AnyObject {
     func updateTableViewAnimated()
 }
 
-final class ImageListPresenter {
+final class ImageListPresenter: ImageListPresenterProtocol {
     weak var view: ImageListViewControllerProtocol?
     var imagesListService = ImagesListService.shared
     private var imagesListServiceObserver: NSObjectProtocol?

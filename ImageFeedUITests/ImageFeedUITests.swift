@@ -68,7 +68,7 @@ final class ImageFeedUITests: XCTestCase {
         
         cell.swipeUp()
 
-        cellToLike.buttons["No Active"].tap()
+        cellToLike.buttons["likeButton"].tap()
         
         
         sleep(2)
@@ -89,7 +89,7 @@ final class ImageFeedUITests: XCTestCase {
         sleep(3)
         app.tabBars.buttons.element(boundBy: 0).tap()
         
-        XCTAssertTrue(app.staticTexts["VadEgi"].exists)
+        XCTAssertTrue(app.staticTexts["VegiCode"].exists)
         XCTAssertTrue(app.staticTexts["@vegicode"].exists)
         
         app.buttons["Exit"].tap()
