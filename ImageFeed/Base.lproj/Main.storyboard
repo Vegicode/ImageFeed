@@ -211,7 +211,7 @@
                                     <action selector="didTapShareButton:" destination="I6U-QB-We7" eventType="touchUpInside" id="Wwa-QV-ddb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgL-b5-8Eg">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgL-b5-8Eg" userLabel="BackButton">
                                 <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Rcd-Bg-lWC"/>
@@ -242,6 +242,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="FQ0-Ok-0hv"/>
                     <connections>
+                        <outlet property="backButton" destination="MgL-b5-8Eg" id="zH6-jz-PJO"/>
                         <outlet property="imageView" destination="swg-NO-Gqb" id="Kam-TG-bgU"/>
                         <outlet property="scrollView" destination="0PA-bP-BID" id="uNo-jd-nBU"/>
                     </connections>

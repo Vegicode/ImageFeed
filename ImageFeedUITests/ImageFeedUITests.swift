@@ -87,7 +87,7 @@ final class ImageFeedUITests: XCTestCase {
     
     func testProfile() throws {
         sleep(3)
-        app.tabBars.buttons.element(boundBy: 0).tap()
+        app.tabBars.buttons.element(boundBy: 1).tap()
         
         XCTAssertTrue(app.staticTexts["VegiCode"].exists)
         XCTAssertTrue(app.staticTexts["@vegicode"].exists)

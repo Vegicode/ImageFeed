@@ -14,6 +14,7 @@ final class SingleImageViewController: UIViewController {
 
     @IBOutlet var scrollView: UIScrollView!
     
+    @IBOutlet var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +24,8 @@ final class SingleImageViewController: UIViewController {
         guard let imageURL else { return }
         
         openImage(photo: imageURL)
+        
+        backButton.accessibilityIdentifier = "nav back button white"
 
     }
     private func openImage(photo: Photo) {
