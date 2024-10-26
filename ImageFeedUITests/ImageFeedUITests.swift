@@ -61,6 +61,7 @@ final class ImageFeedUITests: XCTestCase {
         
         let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
         
+        
         let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
         
         sleep(2)
@@ -68,6 +69,7 @@ final class ImageFeedUITests: XCTestCase {
         
         cell.swipeUp()
 
+        cellToLike.buttons["likeButton"].tap()
         cellToLike.buttons["likeButton"].tap()
         
         
@@ -95,5 +97,13 @@ final class ImageFeedUITests: XCTestCase {
         app.buttons["Exit"].tap()
         
         app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
+        
+        sleep(2)
+        
+        let loginButton = app.buttons["Authenticate"]
+        XCTAssertTrue(loginButton.waitForExistence(timeout: 10))
+        
+        loginButton.tap()
+        
     }
 }
